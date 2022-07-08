@@ -5,7 +5,7 @@ import socket
 import json
 
 #setting my class :)
-class ipautantif :
+class autantif :
     def __init__(self) :
         self.login = hex(uuid.getnode())
         self.hostname = socket.gethostname()
@@ -30,6 +30,16 @@ class ipautantif :
             json.dump(obj,of)
         print("your account was create succesfully !!")
         
+    #function that check if a device exist in the database
+    def loginExist(self):
+        with open(acc.path, 'r') as file:
+            data = json.load(file)
+        for data in data['accounts'] :
+            if(data["login"][0]==self.login):
+                return True
+        return False
+
+    #function check the validity of both login and password   
     def checkAcc(self,data,val,password):
         var = 0
         for data in data['accounts'] :
@@ -43,6 +53,7 @@ class ipautantif :
             else:
                 print("login infounded")
         return var
+
     #the login function 
     def loginAcc(self):
         print("hello "+self.hostname)
@@ -58,17 +69,12 @@ class ipautantif :
             print("start process")
         else : 
             print("you dont have access to this comm")
-    def loginExist(self):
-        with open(acc.path, 'r') as file:
-            data = json.load(file)
-        for data in data['accounts'] :
-            if(data["login"][0]==self.login):
-                return True
-        return False
-
+            
+    
 
 #inplemantation of my code :)
-acc = ipautantif()
+acc = autantif()
+
 if (not acc.loginExist()):
     acc.CreateAcc()
 
