@@ -9,7 +9,8 @@ class ipautantif :
     def __init__(self) :
         self.login = hex(uuid.getnode())
         self.hostname = socket.gethostname()
-        self.path="mac_authrntification/database.json"
+        #the path to your json file here
+        self.path="database.json"
 
     #function that create an account by taking the mac address as login
     def CreateAcc(self):
